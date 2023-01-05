@@ -22,18 +22,18 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: HC_OFFICE_SUPPLIES-db
+      - name: HC_OFFICE_SUPPLIES-hdi
 
-  - name: HC_OFFICE_SUPPLIES-db-deployer
+  - name: HC_OFFICE_SUPPLIES-db
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: HC_OFFICE_SUPPLIES-db
+      - name: HC_OFFICE_SUPPLIES-hdi
 
 resources:
-  - name: HC_OFFICE_SUPPLIES-db
+  - name: HC_OFFICE_SUPPLIES-hdi
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
