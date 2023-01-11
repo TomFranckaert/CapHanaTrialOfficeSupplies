@@ -22,19 +22,26 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: HC_OFFICE_SUPPLIES-hdi
+      - name: HC_OFFICE_SUPPLIES-db
 
-  - name: HC_OFFICE_SUPPLIES-db
+  - name: HC_OFFICE_SUPPLIES-db-deployer
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: HC_OFFICE_SUPPLIES-hdi
+      - name: HC_OFFICE_SUPPLIES-db
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
 
 resources:
-  - name: HC_OFFICE_SUPPLIES-hdi
+  - name: HC_OFFICE_SUPPLIES-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+      config:
+        schema: trial_hdi_schema
+        #database_id: "3c6f206e-d7f8-4165-b8e2-14ac34ae313d"
+    properties:
+      hdi-container-name: '${service-name}'
